@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="base :: head">
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<nav th:replace="base :: nav"></nav>
+ 
+	<h1 class="text-center mt-5">Bievenid@ al sistema [[${session.usuario.getNombre()}]]</h1> 
+	<h2 class="text-center mt-5">Rol: [[${session.usuario.getIdrol()}==1?'ADMINISTRADOR':'ALMACENISTA']]</h2>
+	
+ 
+</body>
+</html>

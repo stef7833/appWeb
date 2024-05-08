@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="base :: head">
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+
+
+<script>
+function validar() {
+	var original=document.getElementById("existenciaOriginal");
+	var nuevo=document.getElementById("existencia");
+	
+	if(parseInt(original.value)>parseInt(nuevo.value)){
+		alert("No se puede disminuir la cantidad de producto");
+		return false;
+	}else{	
+		return true;
+	}
+}
+</script>
+
+</head>
+
+<body>
+<nav th:replace="base :: nav"></nav>
+	<div class="jumbotron">
+		<div class="container">
+			<h2 class="text-center mt-5">Formulario de Productos</h2>
+			<br>
+			<form action="#" th:action="@{/productos/addproductos}" th:object="${productos}" method="post" onsubmit="return validar();">
+				
+				<input type="hidden"  th:field="*{idproducto}" />  
+				<input type="hidden"  id="existenciaOriginal" th:value="*{existencia}" />  
+				
+				Nombre: <input type="text" class="form-control" th:field="*{nombre}" th:value="*{nombre}" th:readonly="(*{idproducto}>0)" />
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></small> 
+				<br>
+				
+				Precio: <input type="text" class="form-control" th:field="*{precio}" th:value="*{precio}" th:readonly="(*{idproducto}>0)"/> 
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('precio')}" th:errors="*{precio}"></small> 
+				<br>
+				  
+				Existencia:<input type="text" class="form-control" th:field="*{existencia}" th:value="*{existencia}" th:readonly="(0 == *{idproducto})" /> 
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('existencia')}" th:errors="*{existencia}"></small> 
+				<br>
+
+				Estatus:  <select class="form-control"  th:field="*{estatus}" readonly>
+					  <option th:value="1" th:selected="(1 == *{estatus})" >ACTIVO</option>
+					  <option th:value="2" th:selected="(2 == *{estatus})">INACTIVO</option>
+					</select>  
+				<small class="form-text text-danger" th:if="${#fields.hasErrors('estatus')}" th:errors="*{estatus}"></small>
+				<br>
+				
+				<button class="btn btn-lg btn-primary btn-block"  type="submit">
+					<span class="glyphicon glyphicon-ok" aria-hidden="true"> </span>
+					Guardar
+				</button>  
+
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

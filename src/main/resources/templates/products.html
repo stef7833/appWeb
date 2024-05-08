@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="base :: head">
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body> 
+<nav th:replace="base :: nav"></nav>
+	<div class="container">
+
+		<h1 class="text-center mt-5">Módulo Inventario</h1>
+		<br>
+		<th:block th:if="${session.usuario.getIdrol()}==1">
+			<a href="#" th:href="@{/productos/productsform?idproducto=0}">
+			<button class="btn btn-lg btn-primary btn-block" type="submit">
+				<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+				Agregar Producto
+			</button>
+			</a>
+		</th:block>
+		
+		
+		
+		<div class="panel panel-default">
+			<div class="panel-heading"></div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Existencia</th>
+						<th>Estatus</th>
+					</tr>
+				</thead>
+
+				<tbody> 
+					<tr th:each=" p : ${products}">
+						<td th:text="${p.nombre}"></td>
+						<td th:text="${p.precio}"></td>
+						<td th:text="${p.existencia}"></td> 
+						<td th:text="${p.estatus}==1?'ACTIVO':'INACTIVO'"></td>
+						<td> 
+							<th:block th:if="${session.usuario.getIdrol()}==1">
+								<a href="#" th:href="@{/productos/productsform?idproducto=__${p.idproducto}__}">
+									<button type="button" class="btn btn-warning" title="Agregar existencia">
+										<span class="glyphicon glyphicon-plus-sign" aria-hidden="true" ></span>
+									</button>
+								</a>
+								 
+								<a href="#" th:href="@{/productos/removeproductos?idproducto=__${p.idproducto}__}">
+									<button type="button" th:class="${p.estatus}==1? 'btn btn-danger' : 'btn btn-success'" title="Cambiar estatus">
+										<span th:class="${p.estatus}==1? 'glyphicon glyphicon-ban-circle' : 'glyphicon glyphicon-ok-circle'" aria-hidden="true"></span>
+									</button>
+								</a>
+							</th:block>
+						</td>
+					</tr>
+ 
+  
+				</tbody>
+			</table>
+		</div>  
+
+		
+
+	</div>
+
+
+</body>
+</html>

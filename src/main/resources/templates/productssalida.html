@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="base :: head">
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body> 
+<nav th:replace="base :: nav"></nav>
+	<div class="container">
+
+		<h1 class="text-center mt-5">Módulo Salida de Productos</h1>
+		<br>
+		
+		<div class="panel panel-default">
+			<div class="panel-heading"></div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nombre</th>
+						<th>Precio</th>
+						<th>Existencia</th>
+						<th>Estatus</th>
+					</tr>
+				</thead>
+
+				<tbody>  
+					<tr th:each=" p : ${products}">
+						<td th:text="${p.nombre}"></td>
+						<td th:text="${p.precio}"></td>
+						<td th:text="${p.existencia}"></td> 
+						<td th:text="${p.estatus}==1?'ACTIVO':'INACTIVO'"></td>
+						<td>
+							<a href="#" th:href="@{/productos/productssalidaform?idproducto=__${p.idproducto}__}">
+								<button type="button" class="btn btn-warning" title="Salida de producto">
+									<span class="glyphicon glyphicon-minus" aria-hidden="true" ></span>
+								</button>
+							</a>
+							 
+						</td>
+					</tr>
+ 
+  
+				</tbody>
+			</table>
+		</div>  
+
+		
+
+	</div>
+
+
+</body>
+</html>

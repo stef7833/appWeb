@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="base :: head">
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+
+
+<body> 
+<nav th:replace="base :: nav"></nav>
+	<div class="container">
+	
+		<h1 class="text-center mt-5">Histórico Movimientos</h1>
+		
+		
+		<br>
+		<div class="panel panel-default">
+			<div class="panel-heading"></div>
+			<table class="table">
+				<thead>
+					<tr> 
+						<th>Tipo Movimiento</th>
+						<th>Usuario</th>
+						<th>Producto</th>
+						<th>Fecha_hora</th>
+						<th>Cantidad</th>
+					</tr>
+				</thead>
+
+				<tbody> 
+					<tr th:each=" m : ${movements}">
+						<td th:text="${m.idtipomovimiento}==1?'ENTRADA':'SALIDA'"></td>
+						<td th:text="${m.idusuario}"></td>
+						<td th:text="${m.idproducto}"></td> 
+						<td th:text="${m.fecha_hora}"></td>
+						<td th:text="${m.cantidad}"></td> 
+						
+					</tr>
+ 
+  
+				</tbody>
+			</table>
+		</div>  
+
+		
+	
+	</div>
+
+
+</body>
+</html>
